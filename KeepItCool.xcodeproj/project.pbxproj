@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		670E912C1B1AA0B6000CBF23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E912B1B1AA0B6000CBF23 /* AppDelegate.swift */; };
+		670E912E1B1AA0B6000CBF23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E912D1B1AA0B6000CBF23 /* ViewController.swift */; };
+		670E91311B1AA0B6000CBF23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 670E912F1B1AA0B6000CBF23 /* Main.storyboard */; };
+		670E91331B1AA0B6000CBF23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 670E91321B1AA0B6000CBF23 /* Images.xcassets */; };
+		670E91361B1AA0B6000CBF23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 670E91341B1AA0B6000CBF23 /* LaunchScreen.xib */; };
+		670E91421B1AA0B6000CBF23 /* KeepItCoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E91411B1AA0B6000CBF23 /* KeepItCoolTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		670E913C1B1AA0B6000CBF23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 670E911E1B1AA0B5000CBF23 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 670E91251B1AA0B5000CBF23;
+			remoteInfo = KeepItCool;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		670E91261B1AA0B5000CBF23 /* KeepItCool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepItCool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		670E912A1B1AA0B6000CBF23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		670E912B1B1AA0B6000CBF23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		670E912D1B1AA0B6000CBF23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		670E91301B1AA0B6000CBF23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		670E91321B1AA0B6000CBF23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		670E91351B1AA0B6000CBF23 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		670E913B1B1AA0B6000CBF23 /* KeepItCoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeepItCoolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		670E91401B1AA0B6000CBF23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		670E91411B1AA0B6000CBF23 /* KeepItCoolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepItCoolTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		670E91231B1AA0B5000CBF23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		670E91381B1AA0B6000CBF23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		670E911D1B1AA0B5000CBF23 = {
+			isa = PBXGroup;
+			children = (
+				670E91281B1AA0B5000CBF23 /* KeepItCool */,
+				670E913E1B1AA0B6000CBF23 /* KeepItCoolTests */,
+				670E91271B1AA0B5000CBF23 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		670E91271B1AA0B5000CBF23 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				670E91261B1AA0B5000CBF23 /* KeepItCool.app */,
+				670E913B1B1AA0B6000CBF23 /* KeepItCoolTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		670E91281B1AA0B5000CBF23 /* KeepItCool */ = {
+			isa = PBXGroup;
+			children = (
+				670E912B1B1AA0B6000CBF23 /* AppDelegate.swift */,
+				670E912D1B1AA0B6000CBF23 /* ViewController.swift */,
+				670E912F1B1AA0B6000CBF23 /* Main.storyboard */,
+				670E91321B1AA0B6000CBF23 /* Images.xcassets */,
+				670E91341B1AA0B6000CBF23 /* LaunchScreen.xib */,
+				670E91291B1AA0B5000CBF23 /* Supporting Files */,
+			);
+			path = KeepItCool;
+			sourceTree = "<group>";
+		};
+		670E91291B1AA0B5000CBF23 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				670E912A1B1AA0B6000CBF23 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		670E913E1B1AA0B6000CBF23 /* KeepItCoolTests */ = {
+			isa = PBXGroup;
+			children = (
+				670E91411B1AA0B6000CBF23 /* KeepItCoolTests.swift */,
+				670E913F1B1AA0B6000CBF23 /* Supporting Files */,
+			);
+			path = KeepItCoolTests;
+			sourceTree = "<group>";
+		};
+		670E913F1B1AA0B6000CBF23 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				670E91401B1AA0B6000CBF23 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		670E91251B1AA0B5000CBF23 /* KeepItCool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 670E91451B1AA0B6000CBF23 /* Build configuration list for PBXNativeTarget "KeepItCool" */;
+			buildPhases = (
+				670E91221B1AA0B5000CBF23 /* Sources */,
+				670E91231B1AA0B5000CBF23 /* Frameworks */,
+				670E91241B1AA0B5000CBF23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeepItCool;
+			productName = KeepItCool;
+			productReference = 670E91261B1AA0B5000CBF23 /* KeepItCool.app */;
+			productType = "com.apple.product-type.application";
+		};
+		670E913A1B1AA0B6000CBF23 /* KeepItCoolTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 670E91481B1AA0B6000CBF23 /* Build configuration list for PBXNativeTarget "KeepItCoolTests" */;
+			buildPhases = (
+				670E91371B1AA0B6000CBF23 /* Sources */,
+				670E91381B1AA0B6000CBF23 /* Frameworks */,
+				670E91391B1AA0B6000CBF23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				670E913D1B1AA0B6000CBF23 /* PBXTargetDependency */,
+			);
+			name = KeepItCoolTests;
+			productName = KeepItCoolTests;
+			productReference = 670E913B1B1AA0B6000CBF23 /* KeepItCoolTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		670E911E1B1AA0B5000CBF23 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Kasra Rahjerdi";
+				TargetAttributes = {
+					670E91251B1AA0B5000CBF23 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					670E913A1B1AA0B6000CBF23 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 670E91251B1AA0B5000CBF23;
+					};
+				};
+			};
+			buildConfigurationList = 670E91211B1AA0B5000CBF23 /* Build configuration list for PBXProject "KeepItCool" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 670E911D1B1AA0B5000CBF23;
+			productRefGroup = 670E91271B1AA0B5000CBF23 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				670E91251B1AA0B5000CBF23 /* KeepItCool */,
+				670E913A1B1AA0B6000CBF23 /* KeepItCoolTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		670E91241B1AA0B5000CBF23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670E91311B1AA0B6000CBF23 /* Main.storyboard in Resources */,
+				670E91361B1AA0B6000CBF23 /* LaunchScreen.xib in Resources */,
+				670E91331B1AA0B6000CBF23 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		670E91391B1AA0B6000CBF23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		670E91221B1AA0B5000CBF23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670E912E1B1AA0B6000CBF23 /* ViewController.swift in Sources */,
+				670E912C1B1AA0B6000CBF23 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		670E91371B1AA0B6000CBF23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670E91421B1AA0B6000CBF23 /* KeepItCoolTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		670E913D1B1AA0B6000CBF23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 670E91251B1AA0B5000CBF23 /* KeepItCool */;
+			targetProxy = 670E913C1B1AA0B6000CBF23 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		670E912F1B1AA0B6000CBF23 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				670E91301B1AA0B6000CBF23 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		670E91341B1AA0B6000CBF23 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				670E91351B1AA0B6000CBF23 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		670E91431B1AA0B6000CBF23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		670E91441B1AA0B6000CBF23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		670E91461B1AA0B6000CBF23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KeepItCool/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		670E91471B1AA0B6000CBF23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = KeepItCool/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		670E91491B1AA0B6000CBF23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KeepItCoolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeepItCool.app/KeepItCool";
+			};
+			name = Debug;
+		};
+		670E914A1B1AA0B6000CBF23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = KeepItCoolTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeepItCool.app/KeepItCool";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		670E91211B1AA0B5000CBF23 /* Build configuration list for PBXProject "KeepItCool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				670E91431B1AA0B6000CBF23 /* Debug */,
+				670E91441B1AA0B6000CBF23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		670E91451B1AA0B6000CBF23 /* Build configuration list for PBXNativeTarget "KeepItCool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				670E91461B1AA0B6000CBF23 /* Debug */,
+				670E91471B1AA0B6000CBF23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		670E91481B1AA0B6000CBF23 /* Build configuration list for PBXNativeTarget "KeepItCoolTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				670E91491B1AA0B6000CBF23 /* Debug */,
+				670E914A1B1AA0B6000CBF23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 670E911E1B1AA0B5000CBF23 /* Project object */;
+}
