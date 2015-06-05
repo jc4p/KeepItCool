@@ -1,0 +1,6 @@
+framework module APAddressBook {
+  umbrella header "Pods-KeepItCool-APAddressBook-umbrella.h"
+
+  export *
+  module * { export * }
+}
