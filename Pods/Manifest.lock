@@ -1,0 +1,15 @@
+PODS:
+  - APAddressBook/Core (0.1.8)
+  - APAddressBook/Swift (0.1.8):
+    - APAddressBook/Core
+  - CryptoSwift (0.0.10)
+
+DEPENDENCIES:
+  - APAddressBook/Swift
+  - CryptoSwift
+
+SPEC CHECKSUMS:
+  APAddressBook: cfff7589c5f9ee6ddbe23636b7723c2dbfa60a47
+  CryptoSwift: 3b886d001f50deb65623a8967d68f6b8bf8d9ba1
+
+COCOAPODS: 0.37.2

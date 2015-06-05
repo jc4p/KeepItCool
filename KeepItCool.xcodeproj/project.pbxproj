@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C0BC1845CEBAC954266F731 /* Pods_KeepItCool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E785B940786CC047BB7C0F3D /* Pods_KeepItCool.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		670E912C1B1AA0B6000CBF23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E912B1B1AA0B6000CBF23 /* AppDelegate.swift */; };
 		670E912E1B1AA0B6000CBF23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E912D1B1AA0B6000CBF23 /* ViewController.swift */; };
 		670E91311B1AA0B6000CBF23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 670E912F1B1AA0B6000CBF23 /* Main.storyboard */; };
 		670E91331B1AA0B6000CBF23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 670E91321B1AA0B6000CBF23 /* Images.xcassets */; };
 		670E91361B1AA0B6000CBF23 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 670E91341B1AA0B6000CBF23 /* LaunchScreen.xib */; };
 		670E91421B1AA0B6000CBF23 /* KeepItCoolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E91411B1AA0B6000CBF23 /* KeepItCoolTests.swift */; };
+		6773963C1B1AE0CC00A59201 /* KRCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6773963B1B1AE0CC00A59201 /* KRCollectionViewItem.swift */; };
+		6773963E1B1AE1AD00A59201 /* KRCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6773963D1B1AE1AD00A59201 /* KRCollectionViewItem.xib */; };
+		67A8C9471B211A0F00B87317 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A8C9461B211A0F00B87317 /* Crypto.swift */; };
+		68FA1ADE876728EEEA24689A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3BCD13BC7DADAD6D76DF38 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2E3BCD13BC7DADAD6D76DF38 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		670E91261B1AA0B5000CBF23 /* KeepItCool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeepItCool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		670E912A1B1AA0B6000CBF23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		670E912B1B1AA0B6000CBF23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +42,12 @@
 		670E913B1B1AA0B6000CBF23 /* KeepItCoolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeepItCoolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		670E91401B1AA0B6000CBF23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		670E91411B1AA0B6000CBF23 /* KeepItCoolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepItCoolTests.swift; sourceTree = "<group>"; };
+		6773963B1B1AE0CC00A59201 /* KRCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KRCollectionViewItem.swift; sourceTree = "<group>"; };
+		6773963D1B1AE1AD00A59201 /* KRCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KRCollectionViewItem.xib; sourceTree = "<group>"; };
+		67A8C9461B211A0F00B87317 /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		69302A3FFCD5FF3C083579C0 /* Pods-KeepItCool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepItCool.release.xcconfig"; path = "Pods/Target Support Files/Pods-KeepItCool/Pods-KeepItCool.release.xcconfig"; sourceTree = "<group>"; };
+		C1D92245CAB87A2C97555B37 /* Pods-KeepItCool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeepItCool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeepItCool/Pods-KeepItCool.debug.xcconfig"; sourceTree = "<group>"; };
+		E785B940786CC047BB7C0F3D /* Pods_KeepItCool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeepItCool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C0BC1845CEBAC954266F731 /* Pods_KeepItCool.framework in Frameworks */,
+				68FA1ADE876728EEEA24689A /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +76,8 @@
 				670E91281B1AA0B5000CBF23 /* KeepItCool */,
 				670E913E1B1AA0B6000CBF23 /* KeepItCoolTests */,
 				670E91271B1AA0B5000CBF23 /* Products */,
+				FA9F7DEB4781080788AA4BB5 /* Pods */,
+				DCB09F166C0A1A1E5F416993 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +99,9 @@
 				670E91321B1AA0B6000CBF23 /* Images.xcassets */,
 				670E91341B1AA0B6000CBF23 /* LaunchScreen.xib */,
 				670E91291B1AA0B5000CBF23 /* Supporting Files */,
+				6773963B1B1AE0CC00A59201 /* KRCollectionViewItem.swift */,
+				6773963D1B1AE1AD00A59201 /* KRCollectionViewItem.xib */,
+				67A8C9461B211A0F00B87317 /* Crypto.swift */,
 			);
 			path = KeepItCool;
 			sourceTree = "<group>";
@@ -112,6 +131,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DCB09F166C0A1A1E5F416993 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E785B940786CC047BB7C0F3D /* Pods_KeepItCool.framework */,
+				2E3BCD13BC7DADAD6D76DF38 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA9F7DEB4781080788AA4BB5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C1D92245CAB87A2C97555B37 /* Pods-KeepItCool.debug.xcconfig */,
+				69302A3FFCD5FF3C083579C0 /* Pods-KeepItCool.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 670E91451B1AA0B6000CBF23 /* Build configuration list for PBXNativeTarget "KeepItCool" */;
 			buildPhases = (
+				E71BA2E663D9EC49C52559D2 /* Check Pods Manifest.lock */,
 				670E91221B1AA0B5000CBF23 /* Sources */,
 				670E91231B1AA0B5000CBF23 /* Frameworks */,
 				670E91241B1AA0B5000CBF23 /* Resources */,
+				5B4897A6E348D2DAE68EEB76 /* Copy Pods Resources */,
+				F8CD39A7FEEA730FD7A895CD /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +201,7 @@
 				TargetAttributes = {
 					670E91251B1AA0B5000CBF23 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = WS925YREA8;
 					};
 					670E913A1B1AA0B6000CBF23 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -192,6 +233,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6773963E1B1AE1AD00A59201 /* KRCollectionViewItem.xib in Resources */,
 				670E91311B1AA0B6000CBF23 /* Main.storyboard in Resources */,
 				670E91361B1AA0B6000CBF23 /* LaunchScreen.xib in Resources */,
 				670E91331B1AA0B6000CBF23 /* Images.xcassets in Resources */,
@@ -207,13 +249,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5B4897A6E348D2DAE68EEB76 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeepItCool/Pods-KeepItCool-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E71BA2E663D9EC49C52559D2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F8CD39A7FEEA730FD7A895CD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeepItCool/Pods-KeepItCool-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		670E91221B1AA0B5000CBF23 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67A8C9471B211A0F00B87317 /* Crypto.swift in Sources */,
 				670E912E1B1AA0B6000CBF23 /* ViewController.swift in Sources */,
 				670E912C1B1AA0B6000CBF23 /* AppDelegate.swift in Sources */,
+				6773963C1B1AE0CC00A59201 /* KRCollectionViewItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,21 +432,35 @@
 		};
 		670E91461B1AA0B6000CBF23 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1D92245CAB87A2C97555B37 /* Pods-KeepItCool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = KeepItCool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		670E91471B1AA0B6000CBF23 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69302A3FFCD5FF3C083579C0 /* Pods-KeepItCool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = KeepItCool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -411,6 +517,7 @@
 				670E91471B1AA0B6000CBF23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		670E91481B1AA0B6000CBF23 /* Build configuration list for PBXNativeTarget "KeepItCoolTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +526,7 @@
 				670E914A1B1AA0B6000CBF23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
