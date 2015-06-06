@@ -113,7 +113,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         var abRecord: ABRecord = ABAddressBookGetPersonWithRecordID(abBook, contact.recordID.intValue).takeUnretainedValue()
         
         let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
-        ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, "15558675309", 0 as CFIndex)
+        ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, "443-203-4242", 0 as CFIndex)
         var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
         println("Changed number? \(success)")
         success = ABRecordSetValue(abRecord, kABPersonNoteProperty, note, &err)
