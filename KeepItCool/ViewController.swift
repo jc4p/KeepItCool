@@ -105,7 +105,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         note += "\n;ORIG:"
         
-        note += Crypto.encryptString(phoneNumber)
+        note += Crypto.encryptString(phoneNumber).stringByReplacingOccurrencesOfString(" ", withString: "")
         
         var err : Unmanaged<CFError>? = nil
         var abBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, &err).takeRetainedValue()
