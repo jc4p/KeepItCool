@@ -14,8 +14,7 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
                                          void *context);
 
 @interface APAddressBook ()
-@property (nonatomic, readonly) ABAddressBookRef addressBook;
-@property (nonatomic, readonly) dispatch_queue_t localQueue;
+@property (atomic, readonly) ABAddressBookRef addressBook;
 @property (nonatomic, copy) void (^changeCallback)();
 @end
 
@@ -29,14 +28,8 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
     if (self)
     {
         self.fieldsMask = APContactFieldDefault;
-        NSString *name = [NSString stringWithFormat:@"com.alterplay.addressbook.%ld",
-                                   (long)self.hash];
-        _localQueue = dispatch_queue_create([name cStringUsingEncoding:NSUTF8StringEncoding], NULL);
         CFErrorRef *error = NULL;
-        dispatch_sync(self.localQueue, ^
-        {
-            _addressBook = ABAddressBookCreateWithOptions(NULL, error);
-        });
+        _addressBook = ABAddressBookCreateWithOptions(NULL, error);
         if (error)
         {
             NSString *errorReason = (__bridge_transfer NSString *)CFErrorCopyFailureReason(*error);
@@ -50,16 +43,10 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
 - (void)dealloc
 {
     [self stopObserveChanges];
-    dispatch_sync(self.localQueue, ^
+    if (_addressBook)
     {
-        if (_addressBook)
-        {
-            CFRelease(_addressBook);
-        }
-    });
-#if !OS_OBJECT_USE_OBJC
-    dispatch_release(_localQueue);
-#endif
+        CFRelease(_addressBook);
+    }
 }
 
 #pragma mark - public
@@ -81,9 +68,36 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
     }
 }
 
-- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))callbackBlock
++ (void)requestAccess:(void (^)(BOOL granted, NSError * error))completionBlock {
+    [self requestAccessOnQueue:dispatch_get_main_queue() completion:completionBlock];
+}
+
++ (void)requestAccessOnQueue:(dispatch_queue_t)queue
+                  completion:(void (^)(BOOL granted, NSError * error))completionBlock
 {
-    [self loadContactsOnQueue:dispatch_get_main_queue() completion:callbackBlock];
+    CFErrorRef *initializationError = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, initializationError);
+    if (initializationError)
+    {
+
+        completionBlock ? completionBlock(NO, (__bridge NSError *)(*initializationError)) : nil;
+    }
+    else
+    {
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+        {
+            dispatch_async(queue, ^
+            {
+                completionBlock ? completionBlock(granted, (__bridge NSError *)error) : nil;
+            });
+        });
+    }
+
+}
+
+- (void)loadContacts:(void (^)(NSArray *contacts, NSError *error))completionBlock
+{
+    [self loadContactsOnQueue:dispatch_get_main_queue() completion:completionBlock];
 }
 
 - (void)loadContactsOnQueue:(dispatch_queue_t)queue
@@ -93,47 +107,34 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
     NSArray *descriptors = self.sortDescriptors;
     APContactFilterBlock filterBlock = self.filterBlock;
 
-    dispatch_async(self.localQueue, ^
+    ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef errorRef)
     {
-        ABAddressBookRequestAccessWithCompletion(self.addressBook, ^(bool granted, CFErrorRef errorRef)
+        NSArray *array = nil;
+        NSError *error = nil;
+        if (granted)
         {
-            NSArray *array = nil;
-            NSError *error = nil;
-            if (granted)
+            __block CFArrayRef peopleArrayRef;
+            peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
+            NSUInteger contactCount = (NSUInteger)CFArrayGetCount(peopleArrayRef);
+            NSMutableArray *contacts = [[NSMutableArray alloc] init];
+            for (NSUInteger i = 0; i < contactCount; i++)
             {
-                __block CFArrayRef peopleArrayRef;
-                dispatch_sync(self.localQueue, ^
+                ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
+                APContact *contact = [[APContact alloc] initWithRecordRef:recordRef
+                                                                fieldMask:fieldMask];
+                if (!filterBlock || filterBlock(contact))
                 {
-                    peopleArrayRef = ABAddressBookCopyArrayOfAllPeople(self.addressBook);
-                });
-                NSUInteger contactCount = (NSUInteger)CFArrayGetCount(peopleArrayRef);
-                NSMutableArray *contacts = [[NSMutableArray alloc] init];
-                for (NSUInteger i = 0; i < contactCount; i++)
-                {
-                    ABRecordRef recordRef = CFArrayGetValueAtIndex(peopleArrayRef, i);
-                    APContact *contact = [[APContact alloc] initWithRecordRef:recordRef
-                                                                    fieldMask:fieldMask];
-                    if (!filterBlock || filterBlock(contact))
-                    {
-                        [contacts addObject:contact];
-                    }
+                    [contacts addObject:contact];
                 }
-                [contacts sortUsingDescriptors:descriptors];
-                array = contacts.copy;
-                CFRelease(peopleArrayRef);
             }
-            else if (errorRef)
-            {
-                error = (__bridge NSError *)errorRef;
-            }
-
-            dispatch_async(queue, ^
-            {
-                if (completionBlock)
-                {
-                    completionBlock(array, error);
-                }
-            });
+            [contacts sortUsingDescriptors:descriptors];
+            array = contacts.copy;
+            CFRelease(peopleArrayRef);
+        }
+        error = errorRef ? (__bridge NSError *)errorRef : nil;
+        dispatch_async(queue, ^
+        {
+            completionBlock ? completionBlock(array, error) : nil;
         });
     });
 }
@@ -144,12 +145,9 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
     {
         if (!self.changeCallback)
         {
-            dispatch_async(self.localQueue, ^
-            {
-                ABAddressBookRegisterExternalChangeCallback(self.addressBook,
-                                                            APAddressBookExternalChangeCallback,
-                                                            (__bridge void *)(self));
-            });
+            ABAddressBookRegisterExternalChangeCallback(self.addressBook,
+                                                        APAddressBookExternalChangeCallback,
+                                                        (__bridge void *)(self));
         }
         self.changeCallback = callback;
     }
@@ -160,26 +158,20 @@ void APAddressBookExternalChangeCallback(ABAddressBookRef addressBookRef, CFDict
     if (self.changeCallback)
     {
         self.changeCallback = nil;
-        dispatch_async(self.localQueue, ^
-        {
-            ABAddressBookUnregisterExternalChangeCallback(self.addressBook,
-                                                          APAddressBookExternalChangeCallback,
-                                                          (__bridge void *)(self));
-        });
+        ABAddressBookUnregisterExternalChangeCallback(self.addressBook,
+                                                      APAddressBookExternalChangeCallback,
+                                                      (__bridge void *)(self));
     }
 }
 
 - (APContact *)getContactByRecordID:(NSNumber *)recordID
 {
-    __block APContact *contact = nil;
-    dispatch_sync(self.localQueue, ^
+    APContact *contact = nil;
+    ABRecordRef ref = ABAddressBookGetPersonWithRecordID(self.addressBook, recordID.intValue);
+    if (ref != NULL)
     {
-        ABRecordRef ref = ABAddressBookGetPersonWithRecordID(self.addressBook, recordID.intValue);
-        if (ref != NULL)
-        {
-            contact = [[APContact alloc] initWithRecordRef:ref fieldMask:self.fieldsMask];
-        }
-    });
+        contact = [[APContact alloc] initWithRecordRef:ref fieldMask:self.fieldsMask];
+    }
     return contact;
 }
 

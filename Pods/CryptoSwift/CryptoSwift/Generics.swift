@@ -25,7 +25,7 @@ extension UInt64:Initiable {}
 func integerFromBitsArray<T: UnsignedIntegerType>(bits: [Bit]) -> T
 {
     var bitPattern:T = 0
-    for (idx,b) in enumerate(bits) {
+    for (idx,b) in bits.enumerate() {
         if (b == Bit.One) {
             let bit = T(UIntMax(1) << UIntMax(idx))
             bitPattern = bitPattern | bit
@@ -35,36 +35,36 @@ func integerFromBitsArray<T: UnsignedIntegerType>(bits: [Bit]) -> T
 }
 
 /// Initialize integer from array of bytes.
-/// I found this method slow
-@availability(*, deprecated=0.8)
-func integerWithBytes<T: IntegerType>(bytes: [UInt8]) -> T {
-    var totalBytes = Swift.min(bytes.count, sizeof(T))
-    // get slice of Int
-    var start = Swift.max(bytes.count - sizeof(T),0)
-    var intarr = [UInt8](bytes[start..<(start + totalBytes)])
-    
-    // pad size if necessary
-    while (intarr.count < sizeof(T)) {
-        intarr.insert(0 as UInt8, atIndex: 0)
+/// This method may be slow
+func integerWithBytes<T: IntegerType where T:ByteConvertible, T: BitshiftOperationsType>(bytes: [UInt8]) -> T {
+    var bytes = bytes.reverse() as Array<UInt8> //FIXME: check it this is equivalent of Array(...)
+    if bytes.count < sizeof(T) {
+        let paddingCount = sizeof(T) - bytes.count
+        if (paddingCount > 0) {
+            bytes += [UInt8](count: paddingCount, repeatedValue: 0)
+        }
     }
-    intarr = intarr.reverse()
     
-    var i:T = 0
-    var data = NSData(bytes: intarr, length: intarr.count)
-    data.getBytes(&i, length: sizeofValue(i));
-    return i
+    if sizeof(T) == 1 {
+        return T(truncatingBitPattern: UInt64(bytes[0]))
+    }
+    
+    var result: T = 0
+    for byte in Array(bytes.reverse()) { //FIXME: Array??
+        result = result << 8 | T(byte)
+    }
+    return result
 }
 
 /// Array of bytes, little-endian representation. Don't use if not necessary.
 /// I found this method slow
 func arrayOfBytes<T>(value:T, length:Int? = nil) -> [UInt8] {
     let totalBytes = length ?? sizeof(T)
-    var v = value
     
-    var valuePointer = UnsafeMutablePointer<T>.alloc(1)
+    let valuePointer = UnsafeMutablePointer<T>.alloc(1)
     valuePointer.memory = value
     
-    var bytesPointer = UnsafeMutablePointer<UInt8>(valuePointer)
+    let bytesPointer = UnsafeMutablePointer<UInt8>(valuePointer)
     var bytes = [UInt8](count: totalBytes, repeatedValue: 0)
     for j in 0..<min(sizeof(T),totalBytes) {
         bytes[totalBytes - 1 - j] = (bytesPointer + j).memory
@@ -98,12 +98,12 @@ func shiftLeft<T: SignedIntegerType where T: Initiable>(value: T, count: Int) ->
         return 0;
     }
     
-    var bitsCount = (sizeofValue(value) * 8)
-    var shiftCount = Int(Swift.min(count, bitsCount - 1))
+    let bitsCount = (sizeofValue(value) * 8)
+    let shiftCount = Int(Swift.min(count, bitsCount - 1))
     
     var shiftedValue:T = 0;
     for bitIdx in 0..<bitsCount {
-        var bit = T(IntMax(1 << bitIdx))
+        let bit = T(IntMax(1 << bitIdx))
         if ((value & bit) == bit) {
             shiftedValue = shiftedValue | T(bit << shiftCount)
         }
@@ -118,38 +118,38 @@ func shiftLeft<T: SignedIntegerType where T: Initiable>(value: T, count: Int) ->
 
 // for any f*** other Integer type - this part is so non-Generic
 func shiftLeft(value: UInt, count: Int) -> UInt {
-    return UInt(shiftLeft(Int(value), count))
+    return UInt(shiftLeft(Int(value), count: count)) //FIXME: count:
 }
 
 func shiftLeft(value: UInt8, count: Int) -> UInt8 {
-    return UInt8(shiftLeft(UInt(value), count))
+    return UInt8(shiftLeft(UInt(value), count: count))
 }
 
 func shiftLeft(value: UInt16, count: Int) -> UInt16 {
-    return UInt16(shiftLeft(UInt(value), count))
+    return UInt16(shiftLeft(UInt(value), count: count))
 }
 
 func shiftLeft(value: UInt32, count: Int) -> UInt32 {
-    return UInt32(shiftLeft(UInt(value), count))
+    return UInt32(shiftLeft(UInt(value), count: count))
 }
 
 func shiftLeft(value: UInt64, count: Int) -> UInt64 {
-    return UInt64(shiftLeft(UInt(value), count))
+    return UInt64(shiftLeft(UInt(value), count: count))
 }
 
 func shiftLeft(value: Int8, count: Int) -> Int8 {
-    return Int8(shiftLeft(Int(value), count))
+    return Int8(shiftLeft(Int(value), count: count))
 }
 
 func shiftLeft(value: Int16, count: Int) -> Int16 {
-    return Int16(shiftLeft(Int(value), count))
+    return Int16(shiftLeft(Int(value), count: count))
 }
 
 func shiftLeft(value: Int32, count: Int) -> Int32 {
-    return Int32(shiftLeft(Int(value), count))
+    return Int32(shiftLeft(Int(value), count: count))
 }
 
 func shiftLeft(value: Int64, count: Int) -> Int64 {
-    return Int64(shiftLeft(Int(value), count))
+    return Int64(shiftLeft(Int(value), count: count))
 }
 

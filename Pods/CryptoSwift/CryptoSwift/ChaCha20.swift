@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class ChaCha20 {
+final public class ChaCha20 {
     
     static let blockSize = 64 // 512 / 8
     private let stateSize = 16
     private var context:Context?
     
-    private class Context {
+    final private class Context {
         var input:[UInt32] = [UInt32](count: 16, repeatedValue: 0)
         
         deinit {
@@ -35,10 +35,8 @@ public class ChaCha20 {
     convenience public init?(key:String, iv:String) {
         if let kkey = key.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)?.arrayOfBytes(), let iiv = iv.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)?.arrayOfBytes() {
             self.init(key: kkey, iv: iiv)
-        } else {
-            self.init(key: [UInt8](), iv: [UInt8]()) //FIXME: this is due Swift bug, remove this line later, when fixed
-            return nil
         }
+        return nil
     }
 
     
@@ -78,18 +76,18 @@ public class ChaCha20 {
         output.reserveCapacity(16)
 
         for i in 0..<16 {
-            x[i] = x[i] &+ input[i]
-            output += [UInt8((x[i] & 0xFFFFFFFF) >> 24),
+            x[i] = x[i] &+ input[i]            
+            output.extend([UInt8((x[i] & 0xFFFFFFFF) >> 24),
                        UInt8((x[i] & 0xFFFFFF) >> 16),
                        UInt8((x[i] & 0xFFFF) >> 8),
-                       UInt8((x[i] & 0xFF) >> 0)]
+                       UInt8((x[i] & 0xFF) >> 0)])
         }
 
         return output;
     }
         
-    private func contextSetup(# iv:[UInt8], key:[UInt8]) -> Context? {
-        var ctx = Context()
+    private func contextSetup(iv  iv:[UInt8], key:[UInt8]) -> Context? {
+        let ctx = Context()
         let kbits = key.count * 8
         
         if (kbits != 128 && kbits != 256) {
@@ -173,16 +171,16 @@ public class ChaCha20 {
     
     private final func quarterround(inout a:UInt32, inout _ b:UInt32, inout _ c:UInt32, inout _ d:UInt32) {
         a = a &+ b
-        d = rotateLeft((d ^ a), 16)
+        d = rotateLeft((d ^ a), n: 16) //FIXME: WAT? n:
         
         c = c &+ d
-        b = rotateLeft((b ^ c), 12);
+        b = rotateLeft((b ^ c), n: 12);
         
         a = a &+ b
-        d = rotateLeft((d ^ a), 8);
+        d = rotateLeft((d ^ a), n: 8);
 
         c = c &+ d
-        b = rotateLeft((b ^ c), 7);
+        b = rotateLeft((b ^ c), n: 7);
     }
 }
 

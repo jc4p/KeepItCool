@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  KeepItCool
 //
 //  Created by Kasra Rahjerdi on 5/30/15.
@@ -8,16 +8,20 @@
 
 import UIKit
 import AddressBookUI
+import AdSupport
 import APAddressBook
 import CryptoSwift
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ABPeoplePickerNavigationControllerDelegate {
+class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ABPeoplePickerNavigationControllerDelegate {
+    private let ICECOLD_NUMBER = "443-203-4242"
     private let reuseIdentifier: String = "mainContactsCell"
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var countLabel: UILabel!
     
     private var addressBook = APAddressBook()
     private var contacts = [APContact]()
+    private var crypto: Crypto!;
         
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,13 +41,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath:indexPath) as! KRCollectionViewItem
         
         cell.setText(contacts[indexPath.indexAtPosition(1)].compositeName)
-        
+
         return cell
     }
     
     private func openAddressBook() {
         addressBook = APAddressBook()
-        addressBook.fieldsMask = APContactField.Default | APContactField.RecordID | APContactField.CompositeName | APContactField.Note
+        addressBook.fieldsMask = [APContactField.Default, APContactField.RecordID, APContactField.CompositeName, APContactField.Note]
         addressBook.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true),
             NSSortDescriptor(key: "lastName", ascending: true)]
         
@@ -53,6 +57,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
 
     private func setup() {
+        let adHash = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString.md5()
+        crypto = Crypto(hash: adHash!)
+            
         openAddressBook()
         
         addressBook.loadContacts(
@@ -73,7 +80,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         updateCountLabel()
         
         let insertedIndexPathRange = 0..<data.count
-        var insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
+        let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
         collectionView.performBatchUpdates({self.collectionView.insertItemsAtIndexPaths(insertedIndexPaths)}, completion: nil)
     }
     
@@ -84,14 +91,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     private func appendContact(contact: APContact) {
         scrambleContact(contact)
         openAddressBook()
-        var modifiedContact = addressBook.getContactByRecordID(contact.recordID)
+        let modifiedContact = addressBook.getContactByRecordID(contact.recordID)
         self.contacts.append(modifiedContact)
         updateCountLabel()
         self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: self.contacts.count - 1, inSection: 0)])
     }
     
     private func scrambleContact(contact: APContact) {
-        var phoneNumber = contact.phones[0] as! String
+        let phoneNumber = contact.phones[0] as! String
         var originalNote = contact.note
         var note = ""
 
@@ -105,21 +112,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         note += "\n;ORIG:"
         
-        note += Crypto.encryptString(phoneNumber).stringByReplacingOccurrencesOfString(" ", withString: "")
+        note += crypto.encryptString(phoneNumber).stringByReplacingOccurrencesOfString(" ", withString: "")
         
         var err : Unmanaged<CFError>? = nil
-        var abBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, &err).takeRetainedValue()
+        let abBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, &err).takeRetainedValue()
         
-        var abRecord: ABRecord = ABAddressBookGetPersonWithRecordID(abBook, contact.recordID.intValue).takeUnretainedValue()
+        let abRecord: ABRecord = ABAddressBookGetPersonWithRecordID(abBook, contact.recordID.intValue).takeUnretainedValue()
         
         let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
-        ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, "443-203-4242", 0 as CFIndex)
+        ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, ICECOLD_NUMBER, 0 as CFIndex)
         var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
-        println("Changed number? \(success)")
+        print("Changed number? \(success)")
         success = ABRecordSetValue(abRecord, kABPersonNoteProperty, note, &err)
-        println("Set note? \(success)")
+        print("Set note? \(success)")
         success = ABAddressBookSave(abBook, &err)
-        println("Saving addressbook successful? \(success)")
+        print("Saving addressbook successful? \(success)")
     }
     
     private func unscrambleContact(contact: APContact) {
@@ -129,23 +136,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let numberEncryptedAndHexed = note.substringWithRange(ourRange)
         
-        var oldNote = note.substringToIndex(advance(ourRange.startIndex, -7))
+        let oldNote = note.substringToIndex(advance(ourRange.startIndex, -7))
         
-        let phoneNumber = Crypto.decryptString(numberEncryptedAndHexed)
+        let phoneNumber = crypto.decryptString(numberEncryptedAndHexed)
         
         var err : Unmanaged<CFError>? = nil
-        var abBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, &err).takeRetainedValue()
+        let abBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, &err).takeRetainedValue()
         
-        var abRecord: ABRecord = ABAddressBookGetPersonWithRecordID(abBook, contact.recordID.intValue).takeUnretainedValue()
+        let abRecord: ABRecord = ABAddressBookGetPersonWithRecordID(abBook, contact.recordID.intValue).takeUnretainedValue()
         
         let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
         ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, phoneNumber, 0 as CFIndex)
         var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
-        println("Changed number? \(success)")
+        print("Changed number? \(success)")
         success = ABRecordSetValue(abRecord, kABPersonNoteProperty, oldNote, &err)
-        println("Reset note? \(success)")
+        print("Reset note? \(success)")
         success = ABAddressBookSave(abBook, &err)
-        println("Saving addressbook successful? \(success)")
+        print("Saving addressbook successful? \(success)")
 
     }
 
@@ -161,21 +168,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        var contact = contacts[indexPath.indexAtPosition(1)]
+        let contact = contacts[indexPath.indexAtPosition(1)]
         unscrambleContact(contact)
         
         openAddressBook()
-        var modifiedContact = addressBook.getContactByRecordID(contact.recordID)
+        addressBook.getContactByRecordID(contact.recordID)
         self.contacts.removeAtIndex(indexPath.indexAtPosition((1)))
         updateCountLabel()
         self.collectionView.deleteItemsAtIndexPaths([indexPath])
     }
     
-    func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController!, didSelectPerson person: ABRecordRef!) {
+    func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController, didSelectPerson person: ABRecordRef) {
         appendContact(self.addressBook.getContactByRecordID(NSNumber(int: ABRecordGetRecordID(person))))
     }
     
-    func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController!, shouldContinueAfterSelectingPerson person: ABRecordRef!) -> Bool {
+    func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController, shouldContinueAfterSelectingPerson person: ABRecordRef) -> Bool {
         
         peoplePickerNavigationController(peoplePicker, didSelectPerson: person)
         
@@ -184,7 +191,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return false;
     }
 
-    func peoplePickerNavigationControllerDidCancel(peoplePicker: ABPeoplePickerNavigationController!) {
+    func peoplePickerNavigationControllerDidCancel(peoplePicker: ABPeoplePickerNavigationController) {
         peoplePicker.dismissViewControllerAnimated(true, completion: nil)
     }
     

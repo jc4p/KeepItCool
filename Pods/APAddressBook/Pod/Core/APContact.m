@@ -41,6 +41,10 @@
         {
             _company = [self stringProperty:kABPersonOrganizationProperty fromRecord:recordRef];
         }
+        if (fieldMask & APContactFieldJobTitle)
+        {
+            _jobTitle = [self stringProperty:kABPersonJobTitleProperty fromRecord:recordRef];
+        }
         if (fieldMask & APContactFieldPhones)
         {
             _phones = [self arrayProperty:kABPersonPhoneProperty fromRecord:recordRef];
@@ -214,12 +218,15 @@
                             withBlock:(void (^)(ABMultiValueRef multiValue, NSUInteger index))block
 {
     ABMultiValueRef multiValue = ABRecordCopyValue(recordRef, property);
-    NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
-    for (NSUInteger i = 0; i < count; i++)
+    if (multiValue)
     {
-        block(multiValue, i);
+        NSUInteger count = (NSUInteger)ABMultiValueGetCount(multiValue);
+        for (NSUInteger i = 0; i < count; i++)
+        {
+            block(multiValue, i);
+        }
+        CFRelease(multiValue);
     }
-    CFRelease(multiValue);
 }
 
 @end

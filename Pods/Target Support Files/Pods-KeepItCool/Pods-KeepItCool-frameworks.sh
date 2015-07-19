@@ -49,9 +49,11 @@ code_sign() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'APAddressBook.framework'
+  install_framework 'Alamofire.framework'
   install_framework 'CryptoSwift.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'APAddressBook.framework'
+  install_framework 'Alamofire.framework'
   install_framework 'CryptoSwift.framework'
 fi

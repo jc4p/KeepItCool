@@ -56,6 +56,8 @@ Available fields:
 * APContactFieldRecordID - *ID of record in iOS address book*
 * APContactFieldSocialProfiles - *array of social profiles*
 * APContactFieldNote - *contact notes*
+* APContactFieldLinkedRecordIDs - *linked contacts record IDs*
+* APContactFieldJobTitle - *contact job title*
 * APContactFieldDefault - *contact first name, last name and phones array*
 * APContactFieldAll - *all contact fields described above*
 
