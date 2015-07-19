@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
         addressBook.loadContacts(
             { (apContacts: [AnyObject]!, error: NSError!) in
                 if (apContacts != nil) {
-                    self.performSegueWithIdentifier("loginMainSegue", sender: sender)
+                    self.registerUser(sender);
                 }
                 else if (error != nil) {
                     let alert = UIAlertView(title: "Error", message: error.localizedDescription,
@@ -33,6 +33,19 @@ class LoginViewController: UIViewController {
                     alert.show()
                 }
         })
+    }
 
+    private func registerUser(sender: UIButton) {
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        print(UIDevice.currentDevice().identifierForVendor!.UUIDString)
+        SubZeroClient.register(UIDevice.currentDevice().identifierForVendor!.UUIDString, deviceToken: delegate.deviceToken)
+            .response { request, response, data, error in
+                if (error == nil) {
+                    self.performSegueWithIdentifier("loginMainSegue", sender: sender)
+                }
+                else {
+                    print(error);
+                }
+            };
     }
 }
