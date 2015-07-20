@@ -25,12 +25,27 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func getStartedButtonPressed(sender: UIButton) {
+        sender.enabled = false;
         let addressBook = APAddressBook()
         
         addressBook.loadContacts(
             { (apContacts: [AnyObject]!, error: NSError!) in
                 if (apContacts != nil) {
-                    self.performSegueWithIdentifier("loginTriggersSegue", sender: sender)
+                    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    
+                    SubZeroClient.register(UIDevice.currentDevice().identifierForVendor!.UUIDString, deviceToken: delegate.deviceToken)
+                        .responseString { request, response, data, error in
+                            if (error == nil) {
+                                self.performSegueWithIdentifier("loginTriggersSegue", sender: self)
+                            }
+                            else {
+                                print("Unable to register APN device token:")
+                                print(error);
+                                let alert = UIAlertView(title: "Error", message: error!.localizedDescription,
+                                    delegate: nil, cancelButtonTitle: "OK")
+                                alert.show()
+                            }
+                    }
                 }
                 else if (error != nil) {
                     let alert = UIAlertView(title: "Error", message: error.localizedDescription,

@@ -60,6 +60,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Received remote notification: " + userInfo.description)
         handler(UIBackgroundFetchResult.NewData);
     }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        if (url.scheme != "keepitcool") {
+            return false;
+        }
+        
+        var untappdToken: String;
+        
+        if (url.host == "untappd") {
+            untappdToken = url.fragment!
+            let navController = window?.rootViewController as? MainNavigationViewController
+            if (navController != nil) {
+                let triggersController = navController?.topViewController as? TriggersViewController
+                if (triggersController != nil) {
+                    triggersController!.untappdConnected(untappdToken)
+                }
+            }
+        }
+        
+        return true;
+    }
 
 }
 

@@ -15,4 +15,12 @@ class SubZeroClient {
     static func register(uid: String, deviceToken: String) -> Request {
         return Alamofire.request(.POST, URLString: API_BASE + "register", parameters: ["uid": uid, "deviceToken": deviceToken])
     }
+    
+    static func setUntappdToken(uid: String, untappdToken: String) -> Request {
+        return Alamofire.request(.POST, URLString: API_BASE + "tokens/untappd", parameters: ["uid": uid, "untappdToken": untappdToken])
+    }
+    
+    static func saveSettings(uid: String, useUntappd: Bool, useSwarm: Bool) -> Request {
+        return Alamofire.request(.POST, URLString: API_BASE + "settings", parameters: ["uid": uid, "useUntappd": useUntappd, "useSwarm": useSwarm])
+    }
 }
