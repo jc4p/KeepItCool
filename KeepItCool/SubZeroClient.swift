@@ -10,9 +10,9 @@ import Foundation
 import Alamofire
 
 class SubZeroClient {
-    private static let API_BASE = "http://kasra-subzero.herokuapp.com/"
+    private static let API_BASE = "https://kasra-subzero.herokuapp.com/"
 
-    static func register(uid: String, deviceToken: NSData) -> Request {
+    static func register(uid: String, deviceToken: String) -> Request {
         return Alamofire.request(.POST, URLString: API_BASE + "register", parameters: ["uid": uid, "deviceToken": deviceToken])
     }
 }

@@ -148,11 +148,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
         ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, phoneNumber, 0 as CFIndex)
         var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
-        print("Changed number? \(success)")
+        print("Changed number? \(success)", appendNewline: false)
         success = ABRecordSetValue(abRecord, kABPersonNoteProperty, oldNote, &err)
-        print("Reset note? \(success)")
+        print("Reset note? \(success)", appendNewline: false)
         success = ABAddressBookSave(abBook, &err)
-        print("Saving addressbook successful? \(success)")
+        print("Saving addressbook successful? \(success)", appendNewline: false)
 
     }
 

@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var deviceToken: NSData! = nil;
+    var deviceToken: String = "";
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
+        
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -45,12 +47,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        print(deviceToken);
-        self.deviceToken = deviceToken;
+        self.deviceToken = deviceToken.description
+            .stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+            .stringByReplacingOccurrencesOfString(" ", withString: "")
     }
 
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("Couldn't register: \(error)")
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
+        print("Received remote notification: " + userInfo.description)
+        handler(UIBackgroundFetchResult.NewData);
     }
 
 }

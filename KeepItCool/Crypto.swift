@@ -10,12 +10,12 @@ import Foundation
 import CryptoSwift
 
 public class Crypto: NSObject {
-    var keyBytes = [0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00] as [UInt8]
-    var ivBytes = [0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00] as [UInt8]
+    var key: String;
+    var iv: String;
     
     init(hash: String) {
-        keyBytes = [UInt8](hash.substringWithRange(Range<String.Index>(start: hash.startIndex, end: advance(hash.startIndex, 16))).utf8)
-        ivBytes = [UInt8](hash.substringWithRange(Range<String.Index>(start: advance(hash.startIndex, 16), end: hash.endIndex)).utf8)
+        key = hash.substringWithRange(Range<String.Index>(start: hash.startIndex, end: advance(hash.startIndex, 16)))
+        iv = hash.substringWithRange(Range<String.Index>(start: advance(hash.startIndex, 16), end: hash.endIndex))
     }
     
     private func hexByteStringToByteArray(input: String) -> [UInt8] {
@@ -37,16 +37,26 @@ public class Crypto: NSObject {
     
     func encryptString(input: String) -> String {
         let inputData = input.dataUsingEncoding(NSUTF8StringEncoding)!.arrayOfBytes()
-        let bytes = AES(key: keyBytes, iv: ivBytes, blockMode: CipherBlockMode.CBC)!.encrypt(inputData, padding: PKCS7())!
+        var bytes: [UInt8];
+        do {
+            bytes = try AES(key: key, iv: iv)!.encrypt(inputData)
+        } catch {
+            return "";
+        }
         return NSData.withBytes(bytes).hexString
     }
     
     func decryptString(input: String) -> String {
         let inputData = hexByteStringToByteArray(input)
-        let decryptedBytes = AES(key: keyBytes, iv: ivBytes, blockMode: CipherBlockMode.CBC)!.decrypt(inputData, padding: PKCS7())
+        var decryptedBytes: [UInt8];
+        do {
+            decryptedBytes = try AES(key: key, iv: iv)!.decrypt(inputData)
+        } catch {
+            return ""
+        }
         
         var result = ""
-        for asciiCode in decryptedBytes! {
+        for asciiCode in decryptedBytes {
             result.append(UnicodeScalar(asciiCode))
         }
         

@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.20" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="UoN-QJ-k1d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="UoN-QJ-k1d">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.16"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8124.4"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Main View Controller-->
         <scene sceneID="cZP-sY-bsO">
@@ -26,12 +21,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exQ-tV-TGL">
                                 <rect key="frame" x="16" y="30" width="42" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49V-5p-q1d">
                                 <rect key="frame" x="282" y="30" width="22" height="22"/>
+                                <color key="tintColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal">
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -40,7 +37,7 @@
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iob-6k-ofi">
                                 <rect key="frame" x="0.0" y="60" width="320" height="500"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5YS-eB-apv">
                                     <size key="itemSize" width="320" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -64,7 +61,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AI9-Tx-GZr" firstAttribute="top" secondItem="iob-6k-ofi" secondAttribute="bottom" constant="8" symbolic="YES" id="3Fd-RT-86N"/>
                             <constraint firstItem="exQ-tV-TGL" firstAttribute="top" secondItem="QcP-mR-WMI" secondAttribute="topMargin" constant="30" id="3fa-An-dYI"/>
@@ -78,6 +75,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uDE-jf-Zzq"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="collectionView" destination="iob-6k-ofi" id="mCM-fW-9dM"/>
                         <outlet property="countLabel" destination="exQ-tV-TGL" id="2xg-VA-inH"/>
@@ -85,12 +83,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yrs-NK-5s3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="331"/>
+            <point key="canvasLocation" x="765" y="331"/>
         </scene>
         <!--Main Navigation View Controller-->
         <scene sceneID="Qn5-Ru-UGv">
             <objects>
                 <navigationController navigationBarHidden="YES" id="UoN-QJ-k1d" customClass="MainNavigationViewController" customModule="KeepItCool" customModuleProvider="target" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="C6z-9N-3D1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -102,6 +101,111 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zt-BR-lte" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-170" y="331"/>
+        </scene>
+        <!--Triggers View Controller-->
+        <scene sceneID="yg0-2l-QTL">
+            <objects>
+                <viewController id="7QR-Xv-0NP" customClass="TriggersViewController" customModule="KeepItCool" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6od-OP-m2B"/>
+                        <viewControllerLayoutGuide type="bottom" id="n6P-xN-eM4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PD7-Ct-f0n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qoq-Ec-cTP">
+                                <rect key="frame" x="26" y="30" width="268" height="77"/>
+                                <string key="text">KeepItCool works by automatically scrambling your chosen contacts' numbers when necessary. Sadly, it's not magic, so we'll need your help:</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DT4-eJ-2fa">
+                                <rect key="frame" x="26" y="525" width="268" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="All set, let's go!">
+                                    <color key="titleColor" red="1" green="0.36470588235294116" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="doneButtonHit:" destination="7QR-Xv-0NP" eventType="touchUpInside" id="mFl-73-snI"/>
+                                    <action selector="getStartedButtonPressed:" destination="OLZ-cx-g3J" eventType="touchUpInside" id="D7A-p4-xHs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-Sa-PjP">
+                                <rect key="frame" x="26" y="127" width="268" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Connect with Untappd">
+                                    <color key="titleColor" red="1" green="0.42352941176470588" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="untappdHit:" destination="7QR-Xv-0NP" eventType="touchUpInside" id="pjo-Id-4w9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aix-o6-KyF">
+                                <rect key="frame" x="26" y="247" width="268" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Connect with Swarm">
+                                    <color key="titleColor" red="1" green="0.42352941179999998" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="swarmHit:" destination="7QR-Xv-0NP" eventType="touchUpInside" id="Q16-y3-md1"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Triggers after 2 checkins within an hour at restuarants, or 1 checkin to a bar. Resets the next morning at 9 AM." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hI5-iJ-nyn">
+                                <rect key="frame" x="26" y="289" width="268" height="77"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr9-eG-hWk">
+                                <rect key="frame" x="26" y="399" width="268" height="96"/>
+                                <string key="text">Oh, and even if you don't enable any of the options, we'll automatically trigger every night at 2 A.M. Because Nothing Good Happens After 2 A.M.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Triggers after a checkin to at least 1 beer, resets the next morning at 9 AM." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSy-L2-bXf">
+                                <rect key="frame" x="26" y="169" width="268" height="58"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.082352941176470587" green="0.54117647058823526" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="qoq-Ec-cTP" secondAttribute="trailing" constant="10" id="0Lo-ZS-Hj6"/>
+                            <constraint firstItem="Lr9-eG-hWk" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="0vL-Im-FE3"/>
+                            <constraint firstItem="DT4-eJ-2fa" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="7Gd-qc-cQG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hI5-iJ-nyn" secondAttribute="trailing" constant="10" id="7gG-hy-KHt"/>
+                            <constraint firstItem="qoq-Ec-cTP" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="8eY-MT-sg7"/>
+                            <constraint firstItem="Aix-o6-KyF" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="AS4-ZV-39b"/>
+                            <constraint firstItem="sSy-L2-bXf" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="DXc-dI-vgl"/>
+                            <constraint firstItem="hI5-iJ-nyn" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="DcI-Wd-hbI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sSy-L2-bXf" secondAttribute="trailing" constant="10" id="EnK-1K-h36"/>
+                            <constraint firstItem="hI5-iJ-nyn" firstAttribute="top" secondItem="Aix-o6-KyF" secondAttribute="bottom" constant="10" id="JFh-Jc-tS7"/>
+                            <constraint firstItem="DT4-eJ-2fa" firstAttribute="top" secondItem="Lr9-eG-hWk" secondAttribute="bottom" constant="30" id="LkG-ti-81Z"/>
+                            <constraint firstItem="sSy-L2-bXf" firstAttribute="top" secondItem="wi2-Sa-PjP" secondAttribute="bottom" constant="10" id="Rid-mz-4ee"/>
+                            <constraint firstItem="wi2-Sa-PjP" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="S3G-yJ-ucS"/>
+                            <constraint firstItem="wi2-Sa-PjP" firstAttribute="top" secondItem="qoq-Ec-cTP" secondAttribute="bottom" constant="20" id="Tyb-MO-YNc"/>
+                            <constraint firstItem="qoq-Ec-cTP" firstAttribute="top" secondItem="PD7-Ct-f0n" secondAttribute="topMargin" constant="30" id="UHF-BO-O79"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DT4-eJ-2fa" secondAttribute="trailing" constant="10" id="aLn-J3-Tii"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Lr9-eG-hWk" secondAttribute="trailing" constant="10" id="aNZ-13-LfM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wi2-Sa-PjP" secondAttribute="trailing" constant="10" id="bYn-A7-jnl"/>
+                            <constraint firstItem="n6P-xN-eM4" firstAttribute="top" secondItem="DT4-eJ-2fa" secondAttribute="bottom" constant="10" id="jkm-7N-1iy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Aix-o6-KyF" secondAttribute="trailing" constant="10" id="vR8-up-oqr"/>
+                            <constraint firstItem="Aix-o6-KyF" firstAttribute="top" secondItem="sSy-L2-bXf" secondAttribute="bottom" constant="20" id="zNN-pr-qGb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Iov-gr-9nm"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <segue destination="DIm-2r-IOC" kind="push" identifier="triggersMainSegue" id="fLI-7V-oMF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PcD-Sx-P71" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="765" y="-367"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="0h0-7X-QFY">
@@ -116,23 +220,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eJ-Wb-0GC">
-                                <rect key="frame" x="26" y="205" width="268" height="159"/>
+                                <rect key="frame" x="26" y="217" width="268" height="134"/>
                                 <string key="text">KeepItCool protects you from sending embarrasing texts or phone calls when you're not in the best state of mind.
 
-Before you tell us who to protect you against, we'll need access to your address book.</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+Before we get started, we'll need access to your address book.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAM-yU-x2j">
-                                <rect key="frame" x="26" y="528" width="268" height="30"/>
-                                <state key="normal" title="Let's Do This"/>
+                                <rect key="frame" x="26" y="525" width="268" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Let's do this">
+                                    <color key="titleColor" red="1" green="0.36470588235294116" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="getStartedButtonPressed:" destination="OLZ-cx-g3J" eventType="touchUpInside" id="Df1-wV-vQP"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="6eJ-Wb-0GC" secondAttribute="trailing" constant="10" id="09j-v7-oxj"/>
                             <constraint firstItem="yAM-yU-x2j" firstAttribute="leading" secondItem="8lb-aw-elr" secondAttribute="leadingMargin" constant="10" id="6rZ-8P-eNV"/>
@@ -143,8 +250,10 @@ Before you tell us who to protect you against, we'll need access to your address
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fjM-lv-BOT"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <segue destination="DIm-2r-IOC" kind="push" identifier="loginMainSegue" id="SlL-8M-dap"/>
+                        <segue destination="7QR-Xv-0NP" kind="push" identifier="loginTriggersSegue" id="HI0-gj-Pbk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1FY-N3-dwI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -152,4 +261,7 @@ Before you tell us who to protect you against, we'll need access to your address
             <point key="canvasLocation" x="236" y="331"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fLI-7V-oMF"/>
+    </inferredMetricsTieBreakers>
 </document>
