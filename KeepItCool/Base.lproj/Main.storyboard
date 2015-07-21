@@ -121,32 +121,41 @@
                                 <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DT4-eJ-2fa">
-                                <rect key="frame" x="26" y="525" width="268" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DT4-eJ-2fa">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.25098039220000001" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="1Ju-L2-73v"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                                <color key="tintColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="All set, let's go!">
-                                    <color key="titleColor" red="1" green="0.36470588235294116" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="doneButtonHit:" destination="7QR-Xv-0NP" eventType="touchUpInside" id="mFl-73-snI"/>
                                     <action selector="getStartedButtonPressed:" destination="OLZ-cx-g3J" eventType="touchUpInside" id="D7A-p4-xHs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-Sa-PjP">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wi2-Sa-PjP">
                                 <rect key="frame" x="26" y="127" width="268" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="backgroundColor" red="1" green="0.25098039220000001" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                                <color key="tintColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Connect to Untappd">
-                                    <color key="titleColor" red="1" green="0.42352941176470588" blue="0.6470588235294118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="untappdHit:" destination="7QR-Xv-0NP" eventType="touchUpInside" id="pjo-Id-4w9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aix-o6-KyF">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aix-o6-KyF">
                                 <rect key="frame" x="26" y="247" width="268" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="backgroundColor" red="1" green="0.25098039220000001" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                                <color key="tintColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Connect to Swarm">
-                                    <color key="titleColor" red="1" green="0.42352941179999998" blue="0.64705882349999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="swarmHit:" destination="7QR-Xv-0NP" eventType="touchUpInside" id="Q16-y3-md1"/>
@@ -159,7 +168,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lr9-eG-hWk">
-                                <rect key="frame" x="26" y="399" width="268" height="96"/>
+                                <rect key="frame" x="26" y="392" width="268" height="96"/>
                                 <string key="text">Oh, and even if you don't enable any of the options, we'll automatically trigger every night at 2 A.M. Because Nothing Good Happens After 2 A.M.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -174,9 +183,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.082352941176470587" green="0.54117647058823526" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="DT4-eJ-2fa" secondAttribute="trailing" id="0Gj-C5-Krs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qoq-Ec-cTP" secondAttribute="trailing" constant="10" id="0Lo-ZS-Hj6"/>
                             <constraint firstItem="Lr9-eG-hWk" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="0vL-Im-FE3"/>
-                            <constraint firstItem="DT4-eJ-2fa" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="7Gd-qc-cQG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hI5-iJ-nyn" secondAttribute="trailing" constant="10" id="7gG-hy-KHt"/>
                             <constraint firstItem="qoq-Ec-cTP" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="8eY-MT-sg7"/>
                             <constraint firstItem="Aix-o6-KyF" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="AS4-ZV-39b"/>
@@ -187,12 +196,12 @@
                             <constraint firstItem="DT4-eJ-2fa" firstAttribute="top" secondItem="Lr9-eG-hWk" secondAttribute="bottom" constant="30" id="LkG-ti-81Z"/>
                             <constraint firstItem="sSy-L2-bXf" firstAttribute="top" secondItem="wi2-Sa-PjP" secondAttribute="bottom" constant="10" id="Rid-mz-4ee"/>
                             <constraint firstItem="wi2-Sa-PjP" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leadingMargin" constant="10" id="S3G-yJ-ucS"/>
+                            <constraint firstItem="n6P-xN-eM4" firstAttribute="top" secondItem="DT4-eJ-2fa" secondAttribute="bottom" id="TAy-Ui-3Ib"/>
                             <constraint firstItem="wi2-Sa-PjP" firstAttribute="top" secondItem="qoq-Ec-cTP" secondAttribute="bottom" constant="20" id="Tyb-MO-YNc"/>
                             <constraint firstItem="qoq-Ec-cTP" firstAttribute="top" secondItem="PD7-Ct-f0n" secondAttribute="topMargin" constant="30" id="UHF-BO-O79"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DT4-eJ-2fa" secondAttribute="trailing" constant="10" id="aLn-J3-Tii"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Lr9-eG-hWk" secondAttribute="trailing" constant="10" id="aNZ-13-LfM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wi2-Sa-PjP" secondAttribute="trailing" constant="10" id="bYn-A7-jnl"/>
-                            <constraint firstItem="n6P-xN-eM4" firstAttribute="top" secondItem="DT4-eJ-2fa" secondAttribute="bottom" constant="10" id="jkm-7N-1iy"/>
+                            <constraint firstItem="DT4-eJ-2fa" firstAttribute="leading" secondItem="PD7-Ct-f0n" secondAttribute="leading" id="nKe-U1-F3X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Aix-o6-KyF" secondAttribute="trailing" constant="10" id="vR8-up-oqr"/>
                             <constraint firstItem="Aix-o6-KyF" firstAttribute="top" secondItem="sSy-L2-bXf" secondAttribute="bottom" constant="20" id="zNN-pr-qGb"/>
                         </constraints>
@@ -230,11 +239,16 @@ Before we get started, we'll need access to your address book.</string>
                                 <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAM-yU-x2j">
-                                <rect key="frame" x="26" y="525" width="268" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAM-yU-x2j">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.25098039215686274" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ra8-ae-tDu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <color key="tintColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Let's do this">
-                                    <color key="titleColor" red="1" green="0.36470588235294116" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="getStartedButtonPressed:" destination="OLZ-cx-g3J" eventType="touchUpInside" id="Df1-wV-vQP"/>
@@ -244,11 +258,12 @@ Before we get started, we'll need access to your address book.</string>
                         <color key="backgroundColor" red="0.08235294118" green="0.54117647059999996" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="6eJ-Wb-0GC" secondAttribute="trailing" constant="10" id="09j-v7-oxj"/>
-                            <constraint firstItem="yAM-yU-x2j" firstAttribute="leading" secondItem="8lb-aw-elr" secondAttribute="leadingMargin" constant="10" id="6rZ-8P-eNV"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="yAM-yU-x2j" secondAttribute="trailing" constant="10" id="7lB-jP-Gmf"/>
-                            <constraint firstItem="Et5-EO-3F2" firstAttribute="top" secondItem="yAM-yU-x2j" secondAttribute="bottom" constant="10" id="AN1-6F-Ndg"/>
+                            <constraint firstItem="Et5-EO-3F2" firstAttribute="top" secondItem="yAM-yU-x2j" secondAttribute="bottom" id="469-18-RfQ"/>
                             <constraint firstItem="6eJ-Wb-0GC" firstAttribute="leading" secondItem="8lb-aw-elr" secondAttribute="leadingMargin" constant="10" id="FE1-tD-aGi"/>
                             <constraint firstItem="6eJ-Wb-0GC" firstAttribute="centerY" secondItem="8lb-aw-elr" secondAttribute="centerY" id="FVv-US-yff"/>
+                            <constraint firstItem="yAM-yU-x2j" firstAttribute="width" secondItem="8lb-aw-elr" secondAttribute="width" id="fNL-aH-OAP"/>
+                            <constraint firstItem="yAM-yU-x2j" firstAttribute="leading" secondItem="8lb-aw-elr" secondAttribute="leading" id="fcO-Vs-65N"/>
+                            <constraint firstAttribute="trailing" secondItem="yAM-yU-x2j" secondAttribute="trailing" id="nOE-iN-hY8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fjM-lv-BOT"/>
