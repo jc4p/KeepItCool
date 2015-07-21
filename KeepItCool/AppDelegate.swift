@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AdSupport
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -58,6 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler handler: (UIBackgroundFetchResult) -> Void) {
         print("Received remote notification: " + userInfo.description)
+        
+        let shouldQuarantine = (userInfo["quarantine"] != nil)
+        if (shouldQuarantine) {
+            let adHash = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString.md5()
+            ContactTransformer.encryptAll(Crypto(hash: adHash!))
+        }
         handler(UIBackgroundFetchResult.NewData);
     }
     

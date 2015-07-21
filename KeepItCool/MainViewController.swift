@@ -13,7 +13,6 @@ import APAddressBook
 import CryptoSwift
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ABPeoplePickerNavigationControllerDelegate {
-    private let ICECOLD_NUMBER = "443-203-4242"
     private let reuseIdentifier: String = "mainContactsCell"
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -22,6 +21,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     private var addressBook = APAddressBook()
     private var contacts = [APContact]()
     private var crypto: Crypto!;
+    
+    private var protectedRecordIds: [NSNumber] = [];
         
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,9 +52,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         addressBook.sortDescriptors = [NSSortDescriptor(key: "firstName", ascending: true),
             NSSortDescriptor(key: "lastName", ascending: true)]
         
-        addressBook.filterBlock = {(contact: APContact!) -> Bool in
-            contact.note != nil && contact.note.rangeOfString("ORIG") != nil
-        }
+//        addressBook.filterBlock = {(contact: APContact!) -> Bool in
+//            contact.note != nil && contact.note.rangeOfString("ORIG") != nil
+//        }
     }
 
     private func setup() {
@@ -61,14 +62,17 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         crypto = Crypto(hash: adHash!)
             
         openAddressBook()
-        
+        let protectedIds = NSUserDefaults.standardUserDefaults().arrayForKey("protected") as? [NSNumber]
+        if (protectedIds != nil) {
+            self.protectedRecordIds = protectedIds!
+        }
         addressBook.loadContacts(
             { (apContacts: [AnyObject]!, error: NSError!) in
                 if (apContacts != nil) {
                     self.onDataLoaded(apContacts as! [APContact])
                 }
                 else if (error != nil) {
-                    let alert = UIAlertView(title: "Error", message: error.localizedDescription,
+                    let alert = UIAlertView(title: "Error loading contacts", message: error.localizedDescription,
                         delegate: nil, cancelButtonTitle: "OK")
                     alert.show()
                 }
@@ -76,10 +80,16 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     private func onDataLoaded(data: [APContact]) {
-        self.contacts.extend(data)
+        var addedCount = 0
+        for contact in data {
+            if (protectedRecordIds.contains(contact.recordID)) {
+                self.contacts.append(contact);
+                addedCount += 1
+            }
+        }
         updateCountLabel()
         
-        let insertedIndexPathRange = 0..<data.count
+        let insertedIndexPathRange = 0..<addedCount
         let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
         collectionView.performBatchUpdates({self.collectionView.insertItemsAtIndexPaths(insertedIndexPaths)}, completion: nil)
     }
@@ -89,73 +99,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     private func appendContact(contact: APContact) {
-        scrambleContact(contact)
-        openAddressBook()
-        let modifiedContact = addressBook.getContactByRecordID(contact.recordID)
-        self.contacts.append(modifiedContact)
+        protectedRecordIds.append(contact.recordID)
+        NSUserDefaults.standardUserDefaults().setValue(protectedRecordIds, forKey: "protected")
+        
+        self.contacts.append(contact)
         updateCountLabel()
         self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: self.contacts.count - 1, inSection: 0)])
     }
     
-    private func scrambleContact(contact: APContact) {
-        let phoneNumber = contact.phones[0] as! String
-        var originalNote = contact.note
-        var note = ""
-
-        if (originalNote != nil && !originalNote.isEmpty) {
-            let ourRange = originalNote.rangeOfString("\n;ORIG:")
-            if (ourRange != nil) {
-                // Shouldn't happen outside of testing
-                originalNote.removeRange(ourRange!)
-            }
-            note = originalNote
-        }
-        note += "\n;ORIG:"
-        
-        note += crypto.encryptString(phoneNumber).stringByReplacingOccurrencesOfString(" ", withString: "")
-        
-        var err : Unmanaged<CFError>? = nil
-        let abBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, &err).takeRetainedValue()
-        
-        let abRecord: ABRecord = ABAddressBookGetPersonWithRecordID(abBook, contact.recordID.intValue).takeUnretainedValue()
-        
-        let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
-        ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, ICECOLD_NUMBER, 0 as CFIndex)
-        var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
-        print("Changed number? \(success)")
-        success = ABRecordSetValue(abRecord, kABPersonNoteProperty, note, &err)
-        print("Set note? \(success)")
-        success = ABAddressBookSave(abBook, &err)
-        print("Saving addressbook successful? \(success)")
-    }
-    
-    private func unscrambleContact(contact: APContact) {
-        let note = contact.note;
-        
-        let ourRange = Range(start: advance(note.rangeOfString("\n;ORIG:")!.startIndex, 7), end: note.endIndex)
-        
-        let numberEncryptedAndHexed = note.substringWithRange(ourRange)
-        
-        let oldNote = note.substringToIndex(advance(ourRange.startIndex, -7))
-        
-        let phoneNumber = crypto.decryptString(numberEncryptedAndHexed)
-        
-        var err : Unmanaged<CFError>? = nil
-        let abBook: ABAddressBook = ABAddressBookCreateWithOptions(nil, &err).takeRetainedValue()
-        
-        let abRecord: ABRecord = ABAddressBookGetPersonWithRecordID(abBook, contact.recordID.intValue).takeUnretainedValue()
-        
-        let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
-        ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, phoneNumber, 0 as CFIndex)
-        var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
-        print("Changed number? \(success)", appendNewline: false)
-        success = ABRecordSetValue(abRecord, kABPersonNoteProperty, oldNote, &err)
-        print("Reset note? \(success)", appendNewline: false)
-        success = ABAddressBookSave(abBook, &err)
-        print("Saving addressbook successful? \(success)", appendNewline: false)
-
-    }
-
     @IBAction func addContactPressed(sender: UIButton) {
         let picker = ABPeoplePickerNavigationController()
         picker.peoplePickerDelegate = self
@@ -169,10 +120,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let contact = contacts[indexPath.indexAtPosition(1)]
-        unscrambleContact(contact)
+        protectedRecordIds.removeAtIndex(protectedRecordIds.indexOf(contact.recordID)!)
+        NSUserDefaults.standardUserDefaults().setValue(protectedRecordIds, forKey: "protected")
         
-        openAddressBook()
-        addressBook.getContactByRecordID(contact.recordID)
         self.contacts.removeAtIndex(indexPath.indexAtPosition((1)))
         updateCountLabel()
         self.collectionView.deleteItemsAtIndexPaths([indexPath])
@@ -193,11 +143,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     func peoplePickerNavigationControllerDidCancel(peoplePicker: ABPeoplePickerNavigationController) {
         peoplePicker.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func getPhonesMultiValueRef(person: ABRecordRef) -> ABMutableMultiValueRef {
-        let phoneMultiValueRef: ABMultiValueRef = Unmanaged.fromOpaque(ABRecordCopyValue(person, kABPersonPhoneProperty).toOpaque()).takeUnretainedValue() as NSObject as ABMultiValueRef
-        return ABMultiValueCreateMutableCopy(phoneMultiValueRef).takeUnretainedValue()
-    }
+    }    
 }
 

@@ -10,12 +10,12 @@ import Foundation
 import CryptoSwift
 
 public class Crypto: NSObject {
-    var key: String;
-    var iv: String;
+    var key: [UInt8];
+    var iv: [UInt8];
     
     init(hash: String) {
-        key = hash.substringWithRange(Range<String.Index>(start: hash.startIndex, end: advance(hash.startIndex, 16)))
-        iv = hash.substringWithRange(Range<String.Index>(start: advance(hash.startIndex, 16), end: hash.endIndex))
+        key = [UInt8](hash.substringWithRange(Range<String.Index>(start: hash.startIndex, end: advance(hash.startIndex, 16))).utf8)
+        iv = [UInt8](hash.substringWithRange(Range<String.Index>(start: advance(hash.startIndex, 16), end: hash.endIndex)).utf8)
     }
     
     private func hexByteStringToByteArray(input: String) -> [UInt8] {
