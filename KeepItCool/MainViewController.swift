@@ -12,10 +12,10 @@ import AdSupport
 import APAddressBook
 import CryptoSwift
 
-class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ABPeoplePickerNavigationControllerDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ABPeoplePickerNavigationControllerDelegate {
     private let reuseIdentifier: String = "mainContactsCell"
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var countLabel: UILabel!
     
     private var addressBook = APAddressBook()
@@ -26,7 +26,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.registerNib(UINib(nibName: "KRCollectionViewItem", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
     }
     
     override func viewDidLoad() {
@@ -34,18 +33,42 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         setup()
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contacts.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath:indexPath) as! KRCollectionViewItem
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("contactCell") as! KRContactViewCell
         
-        cell.setText(contacts[indexPath.indexAtPosition(1)].compositeName)
-
+        if (indexPath.indexAtPosition(1) % 2 == 0) {
+            cell.contentView.backgroundColor = UIColor(red:0.40, green:0.73, blue:0.42, alpha:1.0)
+        } else {
+            cell.contentView.backgroundColor = UIColor(red:0.93, green:0.25, blue:0.48, alpha:1.0)
+        }
+        
+        if (indexPath.indexAtPosition(1) % 2 == 1) {
+            cell.iconView.hidden = true
+        } else {
+            cell.iconView.hidden = false
+        }
+        
+        cell.nameLabel.text = contacts[indexPath.indexAtPosition(1)].compositeName
+        
         return cell
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // nothin
+    }
+    
+    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .Destructive, title: "Remove", handler: { (_, path: NSIndexPath) -> Void in
+            self.removeContactAtIndex(path)
+        });
+        
+        return [deleteAction]
+    }
+        
     private func openAddressBook() {
         addressBook = APAddressBook()
         addressBook.fieldsMask = [APContactField.Default, APContactField.RecordID, APContactField.CompositeName, APContactField.Note]
@@ -60,7 +83,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     private func setup() {
         let adHash = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString.md5()
         crypto = Crypto(hash: adHash!)
-            
+        
+        tableView.backgroundColor = UIColor.clearColor()
+        tableView.separatorStyle = .None
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+        
         openAddressBook()
         let protectedIds = NSUserDefaults.standardUserDefaults().arrayForKey("protected") as? [NSNumber]
         if (protectedIds != nil) {
@@ -81,17 +108,21 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     private func onDataLoaded(data: [APContact]) {
         var addedCount = 0
-        for contact in data {
-            if (protectedRecordIds.contains(contact.recordID)) {
-                self.contacts.append(contact);
-                addedCount += 1
+        // Double loop to perserve ordering of contacts
+        for recordId in protectedRecordIds {
+            for contact in data {
+                if (recordId == contact.recordID) {
+                    self.contacts.append(contact)
+                    addedCount += 1
+                    break;
+                }
             }
         }
         updateCountLabel()
         
         let insertedIndexPathRange = 0..<addedCount
         let insertedIndexPaths = insertedIndexPathRange.map { NSIndexPath(forRow: $0, inSection: 0) }
-        collectionView.performBatchUpdates({self.collectionView.insertItemsAtIndexPaths(insertedIndexPaths)}, completion: nil)
+        tableView.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: .Automatic)
     }
     
     private func updateCountLabel() {
@@ -104,7 +135,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         self.contacts.append(contact)
         updateCountLabel()
-        self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forRow: self.contacts.count - 1, inSection: 0)])
+        tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.contacts.count - 1, inSection: 0)], withRowAnimation: .Automatic)
     }
     
     @IBAction func addContactPressed(sender: UIButton) {
@@ -118,14 +149,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         presentViewController(picker, animated: true, completion: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func removeContactAtIndex(indexPath: NSIndexPath) {
         let contact = contacts[indexPath.indexAtPosition(1)]
         protectedRecordIds.removeAtIndex(protectedRecordIds.indexOf(contact.recordID)!)
         NSUserDefaults.standardUserDefaults().setValue(protectedRecordIds, forKey: "protected")
-        
+
         self.contacts.removeAtIndex(indexPath.indexAtPosition((1)))
         updateCountLabel()
-        self.collectionView.deleteItemsAtIndexPaths([indexPath])
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
     
     func peoplePickerNavigationController(peoplePicker: ABPeoplePickerNavigationController, didSelectPerson person: ABRecordRef) {

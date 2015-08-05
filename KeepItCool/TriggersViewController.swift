@@ -80,13 +80,13 @@ class TriggersViewController: UIViewController {
         self.untappdButton.setTitle("Connected to Untappd", forState: UIControlState.Normal)
         
         SubZeroClient.setUntappdToken(UIDevice.currentDevice().identifierForVendor!.UUIDString, untappdToken: untappdToken)
-            .responseString { request, response, data, error in
-                if (error == nil) {
+            .responseString { request, response, data in
+                if (response?.statusCode == 200) {
                     print("Untappd token saved")
                 }
                 else {
-                    print(error);
-                    let alert = UIAlertView(title: "Unable to save Untappd access", message: error?.localizedDescription,
+                    print(data);
+                    let alert = UIAlertView(title: "Unable to save Untappd access", message: response?.description,
                         delegate: nil, cancelButtonTitle: "OK")
                     alert.show()
                     
