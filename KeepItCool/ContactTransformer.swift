@@ -22,13 +22,30 @@ class ContactTransformer {
         let addressBook = APAddressBook()
         addressBook.fieldsMask = [APContactField.Default, APContactField.RecordID, APContactField.CompositeName, APContactField.Note]
         
-        for record in protectedIds! {
-            let contact = addressBook.getContactByRecordID(record)
-            print("Need to encrypt " + contact.firstName + " " + contact.lastName)
+        var lockedIds = NSUserDefaults.standardUserDefaults().arrayForKey("locked") as? [NSNumber]
+        if (lockedIds == nil) {
+            lockedIds = [NSNumber]();
         }
+
+        for record in protectedIds! {
+            if lockedIds!.contains(record) {
+                continue
+            }
+            
+            let contact = addressBook.getContactByRecordID(record)
+            print("Encrypting " + contact.firstName + " " + contact.lastName)
+            let success = encryptContact(crypto, contact: contact)
+            if (success) {
+                lockedIds!.append(record);
+            }
+        }
+        
+        NSUserDefaults.standardUserDefaults().setValue(lockedIds!, forKey: "locked");
+        
+        
     }
     
-    static func encryptContact(crypto: Crypto, contact: APContact) {
+    static func encryptContact(crypto: Crypto, contact: APContact) -> Bool {
         let phoneNumber = contact.phones[0] as! String
         var originalNote = contact.note
         var note = ""
@@ -53,14 +70,13 @@ class ContactTransformer {
         let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
         ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, ICECOLD_NUMBER, 0 as CFIndex)
         var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
-        print("Changed number? \(success)")
         success = ABRecordSetValue(abRecord, kABPersonNoteProperty, note, &err)
-        print("Set note? \(success)")
         success = ABAddressBookSave(abBook, &err)
-        print("Saving addressbook successful? \(success)")
+        
+        return success;
     }
     
-    static func decryptContact(crypto: Crypto, contact: APContact) {
+    static func decryptContact(crypto: Crypto, contact: APContact) -> Bool {
         let note = contact.note;
         
         let ourRange = Range(start: advance(note.rangeOfString("\n;ORIG:")!.startIndex, 7), end: note.endIndex)
@@ -79,11 +95,9 @@ class ContactTransformer {
         let phoneMultiValueRef: ABMutableMultiValueRef = getPhonesMultiValueRef(abRecord)
         ABMultiValueReplaceValueAtIndex(phoneMultiValueRef, phoneNumber, 0 as CFIndex)
         var success = ABRecordSetValue(abRecord, kABPersonPhoneProperty, phoneMultiValueRef, &err);
-        print("Changed number? \(success)", appendNewline: false)
         success = ABRecordSetValue(abRecord, kABPersonNoteProperty, oldNote, &err)
-        print("Reset note? \(success)", appendNewline: false)
         success = ABAddressBookSave(abBook, &err)
-        print("Saving addressbook successful? \(success)", appendNewline: false)
+        return success
     }
     
     static func getPhonesMultiValueRef(person: ABRecordRef) -> ABMutableMultiValueRef {

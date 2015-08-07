@@ -21,6 +21,6 @@ class SubZeroClient {
     }
     
     static func saveSettings(uid: String, useUntappd: Bool, useSwarm: Bool) -> Request {
-        return Alamofire.request(.POST, "settings", parameters: ["uid": uid, "useUntappd": useUntappd, "useSwarm": useSwarm])
+        return Alamofire.request(.POST, API_BASE + "settings", parameters: ["uid": uid, "useUntappd": useUntappd, "useSwarm": useSwarm])
     }
 }

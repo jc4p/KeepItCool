@@ -23,6 +23,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private var crypto: Crypto!;
     
     private var protectedRecordIds: [NSNumber] = [];
+    private var lockedRecordIds: [NSNumber] = [];
         
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,13 +47,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.contentView.backgroundColor = UIColor(red:0.93, green:0.25, blue:0.48, alpha:1.0)
         }
         
-        if (indexPath.indexAtPosition(1) % 2 == 1) {
-            cell.iconView.hidden = true
-        } else {
+        let contact = contacts[indexPath.indexAtPosition(1)]
+        
+        if (lockedRecordIds.contains(contact.recordID)) {
             cell.iconView.hidden = false
+        } else {
+            cell.iconView.hidden = true
         }
         
-        cell.nameLabel.text = contacts[indexPath.indexAtPosition(1)].compositeName
+        cell.nameLabel.text = contact.compositeName
         
         return cell
     }
@@ -62,6 +65,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let contact = self.contacts[indexPath.indexAtPosition(1)]
+        
+        if (lockedRecordIds.contains(contact.recordID)) {
+            let unlockAction = UITableViewRowAction(style: .Normal, title: "Unlock", handler: { (_, path: NSIndexPath) -> Void
+                in
+                self.unlockContactAtIndex(path)
+            });
+            
+            return [unlockAction]
+        }
+        
         let deleteAction = UITableViewRowAction(style: .Destructive, title: "Remove", handler: { (_, path: NSIndexPath) -> Void in
             self.removeContactAtIndex(path)
         });
@@ -93,6 +107,14 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if (protectedIds != nil) {
             self.protectedRecordIds = protectedIds!
         }
+        
+        let lockedIds = NSUserDefaults.standardUserDefaults().arrayForKey("locked") as? [NSNumber]
+        if (lockedIds != nil) {
+            self.lockedRecordIds = lockedIds!
+        } else {
+            self.lockedRecordIds = [NSNumber]()
+        }
+        
         addressBook.loadContacts(
             { (apContacts: [AnyObject]!, error: NSError!) in
                 if (apContacts != nil) {
@@ -147,6 +169,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    func unlockContactAtIndex(indexPath: NSIndexPath) {
+        let contact = contacts[indexPath.indexAtPosition(1)]
+        
+        if (ContactTransformer.decryptContact(crypto, contact: contact)) {
+            lockedRecordIds.removeAtIndex(lockedRecordIds.indexOf(contact.recordID)!)
+            NSUserDefaults.standardUserDefaults().setValue(lockedRecordIds, forKey: "locked")
+            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        } else {
+            print("Unable to decrypt " + contact.compositeName)
+        }
     }
     
     func removeContactAtIndex(indexPath: NSIndexPath) {
