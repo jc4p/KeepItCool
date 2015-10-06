@@ -93,6 +93,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //            contact.note != nil && contact.note.rangeOfString("ORIG") != nil
 //        }
     }
+    
+    func reloadData() {
+        self.tableView.reloadData()
+        let lockedIds = NSUserDefaults.standardUserDefaults().arrayForKey("locked") as? [NSNumber]
+        if (lockedIds != nil) {
+            self.lockedRecordIds = lockedIds!
+        } else {
+            self.lockedRecordIds = [NSNumber]()
+        }
+    }
 
     private func setup() {
         let adHash = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString.md5()

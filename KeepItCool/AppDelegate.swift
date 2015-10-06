@@ -66,6 +66,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let adHash = ASIdentifierManager.sharedManager().advertisingIdentifier.UUIDString.md5()
             ContactTransformer.encryptAll(Crypto(hash: adHash!))
         }
+        
+        let navController = window?.rootViewController as? MainNavigationViewController
+        if (navController != nil) {
+            let mainController = navController?.topViewController as? MainViewController
+            if (mainController != nil) {
+                mainController!.reloadData()
+            }
+        }
+        
         handler(UIBackgroundFetchResult.NewData);
     }
     

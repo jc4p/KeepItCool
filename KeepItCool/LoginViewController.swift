@@ -34,14 +34,14 @@ class LoginViewController: UIViewController {
                     let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
                     
                     SubZeroClient.register(UIDevice.currentDevice().identifierForVendor!.UUIDString, deviceToken: delegate.deviceToken)
-                        .responseString { response in
-                            if (response.result.isSuccess) {
+                        .response { request, response, data, error in
+                            if (response?.statusCode == 200) {
                                 self.performSegueWithIdentifier("loginTriggersSegue", sender: self)
                             }
                             else {
                                 print("Unable to register APN device token:")
-                                print(response.result.value);
-                                let alert = UIAlertView(title: "Error", message: response.result.value,
+                                print(error!);
+                                let alert = UIAlertView(title: "Error", message: error!.localizedDescription,
                                     delegate: nil, cancelButtonTitle: "OK")
                                 alert.show()
                             }
