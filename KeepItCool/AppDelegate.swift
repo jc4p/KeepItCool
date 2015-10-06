@@ -76,6 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         handler(UIBackgroundFetchResult.NewData);
+
+        application.applicationIconBadgeNumber = 0
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
