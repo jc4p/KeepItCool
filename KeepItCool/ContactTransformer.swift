@@ -79,11 +79,11 @@ class ContactTransformer {
     static func decryptContact(crypto: Crypto, contact: APContact) -> Bool {
         let note = contact.note;
         
-        let ourRange = Range(start: advance(note.rangeOfString("\n;ORIG:")!.startIndex, 7), end: note.endIndex)
+        let ourRange = Range(start: note.rangeOfString("\n;ORIG:")!.startIndex.advancedBy(7), end: note.endIndex)
         
         let numberEncryptedAndHexed = note.substringWithRange(ourRange)
         
-        let oldNote = note.substringToIndex(advance(ourRange.startIndex, -7))
+        let oldNote = note.substringToIndex(ourRange.startIndex.advancedBy(-7))
         
         let phoneNumber = crypto.decryptString(numberEncryptedAndHexed)
         

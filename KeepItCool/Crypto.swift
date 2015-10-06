@@ -14,8 +14,8 @@ public class Crypto: NSObject {
     var iv: [UInt8];
     
     init(hash: String) {
-        key = [UInt8](hash.substringWithRange(Range<String.Index>(start: hash.startIndex, end: advance(hash.startIndex, 16))).utf8)
-        iv = [UInt8](hash.substringWithRange(Range<String.Index>(start: advance(hash.startIndex, 16), end: hash.endIndex)).utf8)
+        key = [UInt8](hash.substringWithRange(Range<String.Index>(start: hash.startIndex, end: hash.startIndex.advancedBy(16))).utf8)
+        iv = [UInt8](hash.substringWithRange(Range<String.Index>(start: hash.startIndex.advancedBy(16), end: hash.endIndex)).utf8)
     }
     
     private func hexByteStringToByteArray(input: String) -> [UInt8] {
@@ -43,7 +43,7 @@ public class Crypto: NSObject {
         } catch {
             return "";
         }
-        return NSData.withBytes(bytes).hexString
+        return NSData.withBytes(bytes).toHexString()
     }
     
     func decryptString(input: String) -> String {

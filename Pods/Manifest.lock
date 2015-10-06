@@ -1,34 +1,32 @@
 PODS:
-  - Alamofire (1.3.0)
+  - Alamofire (3.0.0-beta.3)
   - APAddressBook/Core (0.1.11)
   - APAddressBook/Swift (0.1.11):
     - APAddressBook/Core
-  - CryptoSwift (0.0.12)
+  - CryptoSwift (0.0.16)
 
 DEPENDENCIES:
-  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift-2.0`)
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
   - APAddressBook/Swift
-  - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `swift20`)
+  - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`)
 
 EXTERNAL SOURCES:
   Alamofire:
-    :branch: swift-2.0
     :git: https://github.com/Alamofire/Alamofire.git
   CryptoSwift:
-    :branch: swift20
     :git: https://github.com/krzyzanowskim/CryptoSwift
 
 CHECKOUT OPTIONS:
   Alamofire:
-    :commit: 1a12318dcf6b6918687dd3babe28e521e8b8842c
+    :commit: afc8cdb3283f45b5c886cf1d00fbc66f1893b313
     :git: https://github.com/Alamofire/Alamofire.git
   CryptoSwift:
-    :commit: 8446dadd7a51eb0c968873f94c3f0cec8b5ed165
+    :commit: 8435741cbdd1b4cedb949491720846a0aa3c6b48
     :git: https://github.com/krzyzanowskim/CryptoSwift
 
 SPEC CHECKSUMS:
-  Alamofire: e57db85401895fda01783b3b9bda5b32d9f347ff
+  Alamofire: c89149e58431f6f94527e8c01f920456afe39bd0
   APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
-  CryptoSwift: 16f1b5a768057636275b76d1c43231c2abba9e80
+  CryptoSwift: 05b7e813763fc7a0e8726e962365d6e09f091098
 
 COCOAPODS: 0.38.2
